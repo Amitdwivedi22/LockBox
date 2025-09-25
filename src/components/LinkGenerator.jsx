@@ -106,36 +106,36 @@ function LinkGenerator({ file, onLinkGenerated }) {
     <div className="space-y-8 animate-fade-in-up">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-shimmer">
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-shimmer">
           🔗 Generate Secure Link
         </h2>
-        <p className="text-gray-300 text-lg animate-pulse-slow">
-          Configure your secure, self-destructing link for: <strong className="text-white animate-pulse">{file.name}</strong>
+        <p className="text-slate-300 text-lg animate-pulse-slow">
+          Configure your military-grade secure link for: <strong className="text-white animate-pulse">{file.name}</strong>
         </p>
       </div>
 
       {/* File Info */}
-      <div className="bg-gradient-to-r from-gray-700/50 to-gray-800/50 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
+      <div className="bg-gradient-to-r from-slate-700/50 to-slate-800/50 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
         <div className="flex flex-wrap justify-center items-center gap-4 text-center">
-          <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-xl animate-bounce-gentle">
-            <span className="text-2xl">📄</span>
+          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
+            <span className="text-2xl">�️</span>
             <span className="text-white font-semibold">{file.name}</span>
           </div>
-          <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-xl animate-bounce-gentle">
+          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
             <span className="text-2xl">📏</span>
-            <span className="text-purple-300">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+            <span className="text-cyan-300">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
           </div>
-          <div className="flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-xl animate-bounce-gentle">
-            <span className="text-2xl animate-pulse-slow">🔒</span>
-            <span className="text-green-300">Encrypted</span>
+          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
+            <span className="text-2xl animate-pulse-slow">�</span>
+            <span className="text-emerald-300">Secured</span>
           </div>
         </div>
       </div>
 
       {/* Link Settings */}
-      <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 space-y-6 animate-slide-up">
-        <h3 className="text-xl font-bold text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          ⚙️ Link Settings
+      <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 space-y-6 animate-slide-up">
+        <h3 className="text-xl font-bold text-center bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+          ⚙️ Security Configuration
         </h3>
 
         {/* Expiration Type */}
@@ -151,8 +151,8 @@ function LinkGenerator({ file, onLinkGenerated }) {
                 className={`
                   relative flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105
                   ${expirationType === value
-                    ? 'bg-gradient-to-r from-purple-600/30 to-pink-600/30 border-2 border-purple-400/50 shadow-lg shadow-purple-500/20'
-                    : 'bg-gray-800/50 border-2 border-gray-600/50 hover:border-gray-500/50'
+                    ? 'bg-gradient-to-r from-emerald-600/30 to-cyan-600/30 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20'
+                    : 'bg-slate-800/50 border-2 border-slate-600/50 hover:border-slate-500/50'
                   }
                   animate-fade-in-left
                 `}
@@ -167,7 +167,7 @@ function LinkGenerator({ file, onLinkGenerated }) {
                 <span className="text-2xl animate-bounce-gentle">{icon}</span>
                 <span className="text-gray-200 font-medium">{label}</span>
                 {expirationType === value && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl blur opacity-20 animate-pulse-slow"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl blur opacity-20 animate-pulse-slow"></div>
                 )}
               </label>
             ))}
@@ -182,7 +182,7 @@ function LinkGenerator({ file, onLinkGenerated }) {
           <select
             value={expirationType === 'time' ? expirationTime : downloadLimit}
             onChange={(e) => expirationType === 'time' ? setExpirationTime(e.target.value) : setDownloadLimit(e.target.value)}
-            className="w-full p-4 bg-gray-800/50 border-2 border-gray-600/50 rounded-xl text-white focus:border-purple-400 focus:outline-none transition-all duration-300 animate-scale-in"
+            className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white focus:border-emerald-400 focus:outline-none transition-all duration-300 animate-scale-in"
           >
             {getExpirationOptions().map(option => (
               <option key={option.value} value={option.value} className="bg-gray-800 text-white">
@@ -202,13 +202,13 @@ function LinkGenerator({ file, onLinkGenerated }) {
             ].map(({ key, label, icon }) => (
               <label
                 key={key}
-                className="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-xl cursor-pointer transition-all duration-300 hover:bg-gray-700/50 animate-fade-in-right"
+                className="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-xl cursor-pointer transition-all duration-300 hover:bg-slate-700/50 animate-fade-in-right border border-slate-600/30"
               >
                 <input
                   type="checkbox"
                   checked={key === 'password' ? requirePassword : requireOTP}
                   onChange={(e) => key === 'password' ? setRequirePassword(e.target.checked) : setRequireOTP(e.target.checked)}
-                  className="w-5 h-5 accent-purple-400 animate-pulse-slow"
+                  className="w-5 h-5 accent-emerald-400 animate-pulse-slow"
                 />
                 <span className="text-2xl animate-bounce-gentle">{icon}</span>
                 <span className="text-gray-200 font-medium">{label}</span>
@@ -226,7 +226,7 @@ function LinkGenerator({ file, onLinkGenerated }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password for link access"
-              className="w-full p-4 bg-gray-800/50 border-2 border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-all duration-300"
+              className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:border-emerald-400 focus:outline-none transition-all duration-300"
               required
             />
           </div>
@@ -250,8 +250,8 @@ function LinkGenerator({ file, onLinkGenerated }) {
         className={`
           relative w-full px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform
           ${isGenerating
-            ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 cursor-not-allowed'
-            : 'bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25'
+            ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-400 cursor-not-allowed'
+            : 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25'
           }
           disabled:hover:scale-100 disabled:hover:shadow-none
           animate-pulse-gentle
@@ -274,19 +274,19 @@ function LinkGenerator({ file, onLinkGenerated }) {
       </button>
 
       {/* Security Features */}
-      <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
-        <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-          🔒 Security Features
+      <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+        <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+          🛡️ Security Features
         </h4>
         <div className="grid md:grid-cols-2 gap-4">
           {[
-            { icon: '🔐', text: 'RSA-encrypted file access', color: 'cyan' },
-            { icon: '⏰', text: 'Self-destructing links', color: 'blue' },
-            { icon: '🔑', text: 'Optional password protection', color: 'purple' },
-            { icon: '📱', text: 'OTP verification available', color: 'green' },
-            { icon: '📊', text: 'Complete audit trail', color: 'yellow' }
+            { icon: '🔐', text: 'Military-grade AES-256 encryption', color: 'emerald' },
+            { icon: '🛡️', text: 'Zero-knowledge architecture', color: 'cyan' },
+            { icon: '⏰', text: 'Self-destructing secure links', color: 'blue' },
+            { icon: '🔑', text: 'Multi-factor authentication ready', color: 'emerald' },
+            { icon: '📊', text: 'Complete audit trail', color: 'slate' }
           ].map(({ icon, text, color }) => (
-            <div key={text} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-xl animate-fade-in-left">
+            <div key={text} className="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-xl animate-fade-in-left border border-slate-600/30">
               <span className="text-2xl animate-pulse-slow">{icon}</span>
               <span className={`text-${color}-300 font-medium`}>{text}</span>
             </div>

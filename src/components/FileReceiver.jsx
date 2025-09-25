@@ -206,10 +206,10 @@ function FileReceiver({ link }) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center space-y-4 animate-pulse-slow">
-          <div className="text-6xl animate-spin">🔍</div>
-          <p className="text-xl text-gray-300 font-semibold">Verifying link...</p>
-          <div className="w-64 h-2 bg-gray-700 rounded-full overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
+          <div className="text-6xl animate-spin">�️</div>
+          <p className="text-xl text-slate-300 font-semibold">Security verification in progress...</p>
+          <div className="w-64 h-2 bg-slate-700 rounded-full overflow-hidden">
+            <div className="w-full h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full animate-pulse"></div>
           </div>
         </div>
       </div>
@@ -220,13 +220,13 @@ function FileReceiver({ link }) {
     return (
       <div className="text-center space-y-6 animate-shake">
         <div className="bg-red-500/20 border border-red-400/50 text-red-300 p-8 rounded-3xl">
-          <div className="text-6xl mb-4 animate-bounce">❌</div>
-          <h3 className="text-2xl font-bold mb-2">Access Denied</h3>
+          <div className="text-6xl mb-4 animate-bounce">🚫</div>
+          <h3 className="text-2xl font-bold mb-2">Security Breach Detected</h3>
           <p className="text-lg">{error}</p>
         </div>
         <button
           onClick={() => window.location.reload()}
-          className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 animate-pulse-gentle"
+          className="bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 animate-pulse-gentle border border-red-400/30"
         >
           🔄 Try Another Link
         </button>
@@ -238,40 +238,40 @@ function FileReceiver({ link }) {
     <div className="space-y-8 animate-fade-in-up">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-shimmer">
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-shimmer">
           🔐 Secure File Access
         </h2>
-        <p className="text-gray-300 text-lg animate-pulse-slow">
-          Verify your identity to access the encrypted file
+        <p className="text-slate-300 text-lg animate-pulse-slow">
+          Military-grade security verification required
         </p>
       </div>
 
       {!accessGranted ? (
         <div className="max-w-2xl mx-auto space-y-6">
           {/* File Preview */}
-          <div className="bg-gradient-to-r from-gray-700/50 to-gray-800/50 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
+          <div className="bg-gradient-to-r from-slate-700/50 to-slate-800/50 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
             <div className="text-center space-y-4">
-              <div className="text-6xl animate-float">📄</div>
+              <div className="text-6xl animate-float">🛡️</div>
               <h3 className="text-2xl font-bold text-white">{linkData.file.name}</h3>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
-                <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full animate-pulse-slow">
+                <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full animate-pulse-slow border border-cyan-400/30">
                   📏 {(linkData.file.size / 1024 / 1024).toFixed(2)} MB
                 </span>
-                <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full animate-pulse-slow">
-                  🔒 End-to-end encrypted
+                <span className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full animate-pulse-slow border border-emerald-400/30">
+                  � Military-grade encrypted
                 </span>
               </div>
             </div>
           </div>
 
           {/* Link Information */}
-          <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
-            <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              🔗 Link Information
+          <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+            <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              🔗 Security Information
             </h4>
             <div className="grid md:grid-cols-2 gap-4 text-center">
-              <div className="bg-gray-800/50 p-4 rounded-xl animate-fade-in-left">
-                <p className="text-gray-300">Expiration:</p>
+              <div className="bg-slate-800/50 p-4 rounded-xl animate-fade-in-left border border-slate-600/30">
+                <p className="text-slate-300">Security Level:</p>
                 <p className="text-white font-bold text-lg">
                   {linkData.config.expirationType === 'time'
                     ? `${linkData.config.expirationTime} hours`
@@ -279,13 +279,13 @@ function FileReceiver({ link }) {
                   }
                 </p>
               </div>
-              <div className="bg-gray-800/50 p-4 rounded-xl animate-fade-in-right">
-                <p className="text-gray-300">Downloads used:</p>
+              <div className="bg-slate-800/50 p-4 rounded-xl animate-fade-in-right border border-slate-600/30">
+                <p className="text-slate-300">Access attempts:</p>
                 <p className="text-white font-bold text-lg">{downloadCount}</p>
               </div>
               {linkData.config.expirationType === 'time' && (
-                <div className="bg-gray-800/50 p-4 rounded-xl animate-pulse-slow md:col-span-2">
-                  <p className="text-gray-300">Time remaining:</p>
+                <div className="bg-slate-800/50 p-4 rounded-xl animate-pulse-slow md:col-span-2 border border-slate-600/30">
+                  <p className="text-slate-300">Time remaining:</p>
                   <p className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
                     {timeRemaining}
                   </p>
@@ -305,7 +305,7 @@ function FileReceiver({ link }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter the access password"
-                className="w-full p-4 bg-gray-800/50 border-2 border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-all duration-300 text-center"
+                className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:border-emerald-400 focus:outline-none transition-all duration-300 text-center"
               />
             </div>
           )}
@@ -322,7 +322,7 @@ function FileReceiver({ link }) {
                 onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
                 placeholder="Enter 6-digit OTP"
                 maxLength="6"
-                className="w-full p-4 bg-gray-800/50 border-2 border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-all duration-300 text-center text-2xl font-mono tracking-widest"
+                className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:border-emerald-400 focus:outline-none transition-all duration-300 text-center text-2xl font-mono tracking-widest"
               />
             </div>
           )}
@@ -334,8 +334,8 @@ function FileReceiver({ link }) {
             className={`
               relative w-full px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform
               ${isVerifying
-                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25'
+            ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-400 cursor-not-allowed'
+            : 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25'
               }
               disabled:hover:scale-100 disabled:hover:shadow-none
               animate-pulse-gentle
@@ -367,11 +367,11 @@ function FileReceiver({ link }) {
           </div>
 
           {/* File Info */}
-          <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
-            <div className="text-6xl mb-4 animate-float">📄</div>
+          <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+            <div className="text-6xl mb-4 animate-float">🛡️</div>
             <h3 className="text-2xl font-bold text-white mb-2">{linkData.file.name}</h3>
-            <p className="text-purple-300 text-lg">📏 {(linkData.file.size / 1024 / 1024).toFixed(2)} MB</p>
-            <p className="text-green-300 mt-2">🔒 Encrypted file ready for download</p>
+            <p className="text-cyan-300 text-lg">📏 {(linkData.file.size / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="text-emerald-300 mt-2">🔐 Military-grade encrypted file ready</p>
           </div>
 
           {/* Download Button */}
@@ -381,8 +381,8 @@ function FileReceiver({ link }) {
             className={`
               relative px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform
               ${isDownloading
-                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
+            ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-400 cursor-not-allowed'
+            : 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25'
               }
               disabled:hover:scale-100 disabled:hover:shadow-none
               animate-pulse-gentle
@@ -405,19 +405,19 @@ function FileReceiver({ link }) {
           </button>
 
           {/* Security Notice */}
-          <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
-            <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-              🔒 Security Notice
+          <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+            <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              🛡️ Security Notice
             </h4>
             <div className="space-y-3">
               {[
-                { icon: '🔐', text: 'File will be decrypted on your device only' },
+                { icon: '🔐', text: 'Military-grade decryption on your device only' },
                 { icon: '🖥️', text: 'Original file remains encrypted on server' },
                 { icon: '⏰', text: 'Link may expire after download' }
               ].map(({ icon, text }) => (
-                <div key={text} className="flex items-center justify-center space-x-3 p-2 animate-fade-in-up">
+                <div key={text} className="flex items-center justify-center space-x-3 p-2 animate-fade-in-up border border-slate-600/30 rounded-lg">
                   <span className="text-2xl animate-pulse-slow">{icon}</span>
-                  <span className="text-gray-300">{text}</span>
+                  <span className="text-slate-300">{text}</span>
                 </div>
               ))}
             </div>

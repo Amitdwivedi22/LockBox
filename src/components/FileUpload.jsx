@@ -63,12 +63,12 @@ function FileUpload({ onFileUpload }) {
     <div className="space-y-8 animate-fade-in-up">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-shimmer">
-          📁 Upload Your File
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-shimmer">
+          🛡️ Secure File Upload
         </h2>
-        <p className="text-gray-300 text-lg animate-pulse-slow">
-          Select a file to encrypt and generate a secure, self-destructing link.
-          Your file will be encrypted before upload.
+        <p className="text-slate-300 text-lg animate-pulse-slow">
+          Military-grade encryption for your sensitive files.
+          Complete security from upload to download.
         </p>
       </div>
 
@@ -87,43 +87,43 @@ function FileUpload({ onFileUpload }) {
           className={`
             relative block w-full max-w-md mx-auto p-12 rounded-3xl cursor-pointer transition-all duration-500 transform hover:scale-105
             ${file
-              ? 'bg-gradient-to-br from-green-600/20 to-blue-600/20 border-2 border-green-400/50 shadow-lg shadow-green-500/20'
-              : 'bg-gray-700/50 border-2 border-dashed border-gray-600 hover:border-purple-400 hover:bg-gray-600/50'
+              ? 'bg-gradient-to-br from-emerald-600/20 to-cyan-600/20 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20'
+              : 'bg-slate-700/50 border-2 border-dashed border-slate-600 hover:border-emerald-400 hover:bg-slate-600/50'
             }
             animate-bounce-gentle group
           `}
         >
           <div className="space-y-4">
             <div className={`text-6xl animate-float ${file ? 'animate-heartbeat' : 'group-hover:animate-wiggle'}`}>
-              📄
+              🛡️
             </div>
-            <div className="text-gray-300">
+            <div className="text-slate-300">
               {file ? (
                 <div className="space-y-2 animate-scale-in">
                   <p className="text-xl font-bold text-white">{file.name}</p>
-                  <p className="text-purple-300">{formatFileSize(file.size)}</p>
+                  <p className="text-cyan-300">{formatFileSize(file.size)}</p>
                   <div className="flex justify-center space-x-2">
-                    <span className="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm animate-pulse-slow">
+                    <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-sm animate-pulse-slow">
                       🔒 Encrypted
                     </span>
-                    <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm animate-pulse-slow">
-                      ✅ Ready
+                    <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm animate-pulse-slow">
+                      ✅ Secured
                     </span>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <p className="text-xl font-semibold group-hover:text-purple-300 transition-colors">
+                  <p className="text-xl font-semibold group-hover:text-emerald-300 transition-colors">
                     Click to select a file
                   </p>
-                  <p className="text-sm text-gray-400">Maximum size: 50MB</p>
+                  <p className="text-sm text-slate-400">Maximum size: 50MB</p>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Animated border */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-spin-slow"></div>
+          {/* Animated security border */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500 animate-spin-slow"></div>
         </label>
 
         {/* Error Message */}
@@ -143,8 +143,8 @@ function FileUpload({ onFileUpload }) {
           className={`
             relative px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform
             ${isUploading
-              ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
+              ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-400 cursor-not-allowed'
+              : 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25'
             }
             disabled:hover:scale-100 disabled:hover:shadow-none
             animate-pulse-gentle
@@ -153,33 +153,33 @@ function FileUpload({ onFileUpload }) {
           {isUploading ? (
             <div className="flex items-center space-x-3">
               <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              <span>🔒 Encrypting & Uploading...</span>
+              <span>🛡️ Encrypting & Securing...</span>
             </div>
           ) : (
             <div className="flex items-center space-x-2">
               <span className="animate-bounce">🔐</span>
-              <span>Upload & Encrypt</span>
+              <span>Secure Upload</span>
             </div>
           )}
 
-          {/* Button glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-purple-400 rounded-2xl blur opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+          {/* Security glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-2xl blur opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
         </button>
       </div>
 
       {/* Security Features */}
-      <div className="bg-gray-700/30 border border-gray-600/50 rounded-2xl p-6 animate-slide-up">
-        <h3 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-          🔒 Security Features
+      <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+        <h3 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+          🛡️ Security Features
         </h3>
         <div className="grid md:grid-cols-2 gap-4">
           {[
-            { icon: '🔐', text: 'End-to-end encryption using AES-256', color: 'green' },
-            { icon: '📱', text: 'File encrypted before leaving your device', color: 'blue' },
-            { icon: '⏰', text: 'Self-destructing links available', color: 'purple' },
-            { icon: '🔑', text: 'Optional password protection', color: 'yellow' }
+            { icon: '🔐', text: 'Military-grade AES-256 encryption', color: 'emerald' },
+            { icon: '🛡️', text: 'Zero-knowledge architecture', color: 'cyan' },
+            { icon: '⏰', text: 'Self-destructing secure links', color: 'blue' },
+            { icon: '🔑', text: 'Multi-factor authentication ready', color: 'emerald' }
           ].map(({ icon, text, color }) => (
-            <div key={text} className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-xl animate-fade-in-left">
+            <div key={text} className="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-xl animate-fade-in-left border border-slate-600/30">
               <span className="text-2xl animate-pulse-slow">{icon}</span>
               <span className={`text-${color}-300 font-medium`}>{text}</span>
             </div>
