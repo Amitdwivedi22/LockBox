@@ -1,47 +1,47 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Custom Security Vault Animations */
-@keyframes float-3d {
-  0%, 100% {
-    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) translateZ(0px);
+@layer components {
+  .security-button {
+    @apply relative px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 
+           rounded-lg font-semibold text-white transition-all duration-300 
+           hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25;
   }
-  25% {
-    transform: translate(-50%, -50%) rotateX(5deg) rotateY(90deg) translateZ(20px);
+
+  .security-card {
+    @apply bg-gray-800/50 p-6 rounded-2xl border border-gray-700 
+           hover:border-emerald-500/50 transition-all duration-300 
+           hover:transform hover:scale-105;
   }
-  50% {
-    transform: translate(-50%, -50%) rotateX(0deg) rotateY(180deg) translateZ(40px);
-  }
-  75% {
-    transform: translate(-50%, -50%) rotateX(-5deg) rotateY(270deg) translateZ(20px);
+
+  .security-input {
+    @apply w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 
+           rounded-xl text-white placeholder-slate-400 
+           focus:border-emerald-400 focus:outline-none 
+           transition-all duration-300;
   }
 }
 
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
+/* Custom Scrollbar */
+@layer utilities {
+  .scrollbar-security {
+    scrollbar-width: thin;
+    scrollbar-color: #10b981 #1e293b;
   }
-  to {
-    transform: rotate(360deg);
+
+  .scrollbar-security::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-security::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+  }
+
+  .scrollbar-security::-webkit-scrollbar-thumb {
+    @apply bg-emerald-500 rounded;
   }
 }
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -86,12 +86,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes wiggle {
@@ -234,6 +230,10 @@
 
 /* Smooth Transitions */
 * {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
