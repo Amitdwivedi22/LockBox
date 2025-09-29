@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { generateRSAKeyPair, encryptWithRSA } from '../utils/encryption'
+import gsap from 'gsap'
 
 function LinkGenerator({ file, onLinkGenerated }) {
   const [expirationType, setExpirationType] = useState('time')
@@ -10,6 +11,36 @@ function LinkGenerator({ file, onLinkGenerated }) {
   const [requireOTP, setRequireOTP] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState('')
+
+  const headerRef = useRef(null)
+  const fileInfoRef = useRef(null)
+  const formRef = useRef(null)
+
+  useEffect(() => {
+    // GSAP animations
+    gsap.from(headerRef.current, {
+      y: -50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    })
+
+    gsap.from(fileInfoRef.current, {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.3,
+      ease: 'power3.out'
+    })
+
+    gsap.from(formRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      delay: 0.6,
+      ease: 'power3.out'
+    })
+  }, [])
 
   const handleGenerateLink = async () => {
     if (!file) return
@@ -102,72 +133,85 @@ function LinkGenerator({ file, onLinkGenerated }) {
     }
   }
 
+  // Define expiration type options
+  const expirationTypeOptions = [
+    { value: 'time', label: 'Time-based', icon: '⏰' },
+    { value: 'downloads', label: 'Download count', icon: '📥' }
+  ]
+
   return (
-    <div className="space-y-8 animate-fade-in-up">
+    <div className="space-y-8 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-shimmer">
-          🔗 Generate Secure Link
+      <div ref={headerRef} className="text-center space-y-4">
+        <h2 className="text-3xl md:text-4xl font-bold">
+          <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            🔗 Generate Secure Link
+          </span>
         </h2>
-        <p className="text-slate-300 text-lg animate-pulse-slow">
-          Configure your military-grade secure link for: <strong className="text-white animate-pulse">{file.name}</strong>
+        <p className="text-gray-400 text-lg">
+          Configure your secure link for: <strong className="text-white">{file?.name || 'No file selected'}</strong>
         </p>
       </div>
 
       {/* File Info */}
-      <div className="bg-gradient-to-r from-slate-700/50 to-slate-800/50 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
+      <div ref={fileInfoRef} className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-2xl p-6">
         <div className="flex flex-wrap justify-center items-center gap-4 text-center">
-          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
-            <span className="text-2xl">�️</span>
-            <span className="text-white font-semibold">{file.name}</span>
+          <div className="flex items-center space-x-2 bg-gray-900 px-4 py-2 rounded-xl border border-gray-800">
+            <span className="text-2xl">📁</span>
+            <span className="text-white font-semibold">
+              {file?.name || 'No file selected'}
+            </span>
           </div>
-          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
+          <div className="flex items-center space-x-2 bg-gray-900 px-4 py-2 rounded-xl border border-gray-800">
             <span className="text-2xl">📏</span>
-            <span className="text-cyan-300">{(file.size / 1024 / 1024).toFixed(2)} MB</span>
+            <span className="text-blue-400">
+              {file?.size 
+                ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
+                : 'Size unknown'
+              }
+            </span>
           </div>
-          <div className="flex items-center space-x-2 bg-slate-800/50 px-4 py-2 rounded-xl animate-bounce-gentle border border-slate-600/30">
-            <span className="text-2xl animate-pulse-slow">�</span>
-            <span className="text-emerald-300">Secured</span>
+          <div className="flex items-center space-x-2 bg-gray-900 px-4 py-2 rounded-xl border border-gray-800">
+            <span className="text-2xl">🔒</span>
+            <span className="text-green-400">Secured</span>
           </div>
         </div>
       </div>
 
-      {/* Link Settings */}
-      <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 space-y-6 animate-slide-up">
-        <h3 className="text-xl font-bold text-center bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+      {/* Form Section */}
+      <div ref={formRef} className="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-2xl p-6 space-y-6">
+        {/* Security Configuration */}
+        <h3 className="text-xl font-bold text-center text-white">
           ⚙️ Security Configuration
         </h3>
 
         {/* Expiration Type */}
         <div className="space-y-4">
-          <label className="block text-lg font-semibold text-gray-200">Expiration Type:</label>
+          <label className="block text-lg font-semibold text-gray-300">Expiration Type:</label>
           <div className="flex flex-col sm:flex-row gap-4">
-            {[
-              { value: 'time', label: 'Time-based', icon: '⏰' },
-              { value: 'downloads', label: 'Download count', icon: '📥' }
-            ].map(({ value, label, icon }) => (
+            {expirationTypeOptions.map(({ value, label, icon }) => (
               <label
                 key={value}
                 className={`
-                  relative flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-300 transform hover:scale-105
+                  relative flex-1 flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all
                   ${expirationType === value
-                    ? 'bg-gradient-to-r from-emerald-600/30 to-cyan-600/30 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20'
-                    : 'bg-slate-800/50 border-2 border-slate-600/50 hover:border-slate-500/50'
+                    ? 'bg-gray-800 border-2 border-blue-500 shadow-lg shadow-blue-500/20'
+                    : 'bg-gray-900 border-2 border-gray-700 hover:border-gray-600'
                   }
-                  animate-fade-in-left
                 `}
               >
                 <input
                   type="radio"
+                  name="expirationType"
                   value={value}
                   checked={expirationType === value}
                   onChange={(e) => setExpirationType(e.target.value)}
                   className="hidden"
                 />
-                <span className="text-2xl animate-bounce-gentle">{icon}</span>
-                <span className="text-gray-200 font-medium">{label}</span>
+                <span className="text-2xl">{icon}</span>
+                <span className="text-gray-300 font-medium">{label}</span>
                 {expirationType === value && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl blur opacity-20 animate-pulse-slow"></div>
+                  <div className="absolute inset-0 bg-blue-500/10 rounded-xl pointer-events-none" />
                 )}
               </label>
             ))}
@@ -176,16 +220,16 @@ function LinkGenerator({ file, onLinkGenerated }) {
 
         {/* Expiration Time/Download Limit */}
         <div className="space-y-4">
-          <label className="block text-lg font-semibold text-gray-200">
+          <label className="block text-lg font-semibold text-gray-300">
             {expirationType === 'time' ? 'Expiration Time:' : 'Download Limit:'}
           </label>
           <select
             value={expirationType === 'time' ? expirationTime : downloadLimit}
             onChange={(e) => expirationType === 'time' ? setExpirationTime(e.target.value) : setDownloadLimit(e.target.value)}
-            className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white focus:border-emerald-400 focus:outline-none transition-all duration-300 animate-scale-in"
+            className="w-full p-4 bg-gray-800 border-2 border-gray-700 rounded-xl text-white focus:border-blue-500 focus:outline-none transition-all"
           >
             {getExpirationOptions().map(option => (
-              <option key={option.value} value={option.value} className="bg-gray-800 text-white">
+              <option key={option.value} value={option.value} className="bg-gray-900 text-white">
                 {option.label}
               </option>
             ))}
@@ -194,7 +238,7 @@ function LinkGenerator({ file, onLinkGenerated }) {
 
         {/* Additional Security */}
         <div className="space-y-4">
-          <label className="block text-lg font-semibold text-gray-200">Additional Security:</label>
+          <label className="block text-lg font-semibold text-gray-300">Additional Security:</label>
           <div className="space-y-3">
             {[
               { key: 'password', label: 'Require password', icon: '🔑' },
@@ -202,16 +246,16 @@ function LinkGenerator({ file, onLinkGenerated }) {
             ].map(({ key, label, icon }) => (
               <label
                 key={key}
-                className="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-xl cursor-pointer transition-all duration-300 hover:bg-slate-700/50 animate-fade-in-right border border-slate-600/30"
+                className="flex items-center space-x-4 p-4 bg-gray-900 rounded-xl cursor-pointer transition-all hover:bg-gray-800"
               >
                 <input
                   type="checkbox"
                   checked={key === 'password' ? requirePassword : requireOTP}
                   onChange={(e) => key === 'password' ? setRequirePassword(e.target.checked) : setRequireOTP(e.target.checked)}
-                  className="w-5 h-5 accent-emerald-400 animate-pulse-slow"
+                  className="w-5 h-5 accent-blue-500"
                 />
-                <span className="text-2xl animate-bounce-gentle">{icon}</span>
-                <span className="text-gray-200 font-medium">{label}</span>
+                <span className="text-2xl">{icon}</span>
+                <span className="text-gray-300 font-medium">{label}</span>
               </label>
             ))}
           </div>
@@ -219,14 +263,14 @@ function LinkGenerator({ file, onLinkGenerated }) {
 
         {/* Password Input */}
         {requirePassword && (
-          <div className="space-y-4 animate-scale-in">
-            <label className="block text-lg font-semibold text-gray-200">Password:</label>
+          <div className="space-y-4">
+            <label className="block text-lg font-semibold text-gray-300">Password:</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password for link access"
-              className="w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 rounded-xl text-white placeholder-slate-400 focus:border-emerald-400 focus:outline-none transition-all duration-300"
+              className="w-full p-4 bg-gray-800 border-2 border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none transition-all"
               required
             />
           </div>
@@ -248,47 +292,45 @@ function LinkGenerator({ file, onLinkGenerated }) {
         onClick={handleGenerateLink}
         disabled={isGenerating || (requirePassword && !password)}
         className={`
-          relative w-full px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform
+          w-full px-8 py-4 rounded-xl font-bold text-lg transition-all
           ${isGenerating
-            ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-slate-400 cursor-not-allowed'
-            : 'bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25'
+            ? 'bg-gray-800 text-gray-400 cursor-not-allowed'
+            : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700'
           }
-          disabled:hover:scale-100 disabled:hover:shadow-none
-          animate-pulse-gentle
         `}
       >
         {isGenerating ? (
           <div className="flex items-center justify-center space-x-3">
             <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            <span>🔐 Generating Secure Link...</span>
+            <span>Generating Secure Link...</span>
           </div>
         ) : (
           <div className="flex items-center justify-center space-x-2">
-            <span className="animate-bounce">🚀</span>
+            <span>🔐</span>
             <span>Generate Secure Link</span>
           </div>
         )}
-
-        {/* Button glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-2xl blur opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
       </button>
 
       {/* Security Features */}
-      <div className="bg-slate-700/30 border border-emerald-500/30 rounded-2xl p-6 animate-slide-up">
-        <h4 className="text-xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+      <div className="bg-black/40 border border-gray-800 rounded-2xl p-6">
+        <h4 className="text-xl font-bold text-center mb-4 text-white">
           🛡️ Security Features
         </h4>
         <div className="grid md:grid-cols-2 gap-4">
           {[
-            { icon: '🔐', text: 'Military-grade AES-256 encryption', color: 'emerald' },
-            { icon: '🛡️', text: 'Zero-knowledge architecture', color: 'cyan' },
-            { icon: '⏰', text: 'Self-destructing secure links', color: 'blue' },
-            { icon: '🔑', text: 'Multi-factor authentication ready', color: 'emerald' },
-            { icon: '📊', text: 'Complete audit trail', color: 'slate' }
-          ].map(({ icon, text, color }) => (
-            <div key={text} className="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-xl animate-fade-in-left border border-slate-600/30">
-              <span className="text-2xl animate-pulse-slow">{icon}</span>
-              <span className={`text-${color}-300 font-medium`}>{text}</span>
+            { icon: '🔐', text: 'Military-grade AES-256 encryption' },
+            { icon: '🛡️', text: 'Zero-knowledge architecture' },
+            { icon: '⏰', text: 'Self-destructing secure links' },
+            { icon: '🔑', text: 'Multi-factor authentication ready' },
+            { icon: '📊', text: 'Complete audit trail' }
+          ].map(({ icon, text }) => (
+            <div 
+              key={text} 
+              className="flex items-center space-x-3 p-3 bg-gray-900 rounded-xl border border-gray-800 hover:bg-gray-800/50 transition-colors"
+            >
+              <span className="text-2xl">{icon}</span>
+              <span className="text-gray-300">{text}</span>
             </div>
           ))}
         </div>

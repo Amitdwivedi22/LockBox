@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { decryptFile, decryptWithRSA } from '../utils/encryption'
 
 function FileReceiver({ link }) {
@@ -21,6 +21,26 @@ function FileReceiver({ link }) {
     }
   }, [linkId])
 
+  const updateTimeRemaining = useCallback(() => {
+    if (!linkData || linkData.config.expirationType !== 'time') return
+
+    const createdAt = new Date(linkData.config.createdAt)
+    const expirationTime = linkData.config.expirationTime
+    const expirationDate = new Date(createdAt.getTime() + expirationTime * 60 * 60 * 1000)
+    const now = new Date()
+    const timeLeft = expirationDate - now
+
+    if (timeLeft <= 0) {
+      setError('This link has expired.')
+      setTimeRemaining('Expired')
+    } else {
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60))
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000)
+      setTimeRemaining(`${hours}h ${minutes}m ${seconds}s`)
+    }
+  }, [linkData])
+
   useEffect(() => {
     if (linkData && linkData.config.expirationType === 'time') {
       const timer = setInterval(() => {
@@ -29,7 +49,7 @@ function FileReceiver({ link }) {
       updateTimeRemaining()
       return () => clearInterval(timer)
     }
-  }, [linkData])
+  }, [linkData, updateTimeRemaining])
 
   const loadLinkData = (id) => {
     const data = localStorage.getItem(`link_${id}`)
@@ -65,26 +85,6 @@ function FileReceiver({ link }) {
       }
     } else {
       setError('Invalid or expired link.')
-    }
-  }
-
-  const updateTimeRemaining = () => {
-    if (!linkData || linkData.config.expirationType !== 'time') return
-
-    const createdAt = new Date(linkData.config.createdAt)
-    const expirationTime = linkData.config.expirationTime
-    const expirationDate = new Date(createdAt.getTime() + expirationTime * 60 * 60 * 1000)
-    const now = new Date()
-    const timeLeft = expirationDate - now
-
-    if (timeLeft <= 0) {
-      setError('This link has expired.')
-      setTimeRemaining('Expired')
-    } else {
-      const hours = Math.floor(timeLeft / (1000 * 60 * 60))
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000)
-      setTimeRemaining(`${hours}h ${minutes}m ${seconds}s`)
     }
   }
 

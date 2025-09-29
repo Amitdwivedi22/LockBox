@@ -113,13 +113,13 @@ export function generateRSAKeyPair() {
 }
 
 // Encrypt with RSA (simplified for demo)
-export function encryptWithRSA(data, publicKey) {
+export function encryptWithRSA(data, _publicKey) {
   // In production, implement proper RSA encryption
   return 'rsa-encrypted-' + btoa(data).substring(0, 50) + '...'
 }
 
 // Decrypt with RSA (simplified for demo)
-export function decryptWithRSA(encryptedData, privateKey) {
+export function decryptWithRSA(encryptedData, _privateKey) {
   // In production, implement proper RSA decryption
   return atob(encryptedData.replace('rsa-encrypted-', ''))
 }

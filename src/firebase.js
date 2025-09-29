@@ -1,17 +1,23 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-
-const firebaseConfig = {
-  // Add your Firebase config here
-  apiKey: import.meta.env.VITE_apiKey,
-  authDomain: import.meta.env.VITE_authDomain,
-  projectId: import.meta.env.VITE_projectId,
-  storageBucket: import.meta.env.VITE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_messagingSenderId,
-  appId: import.meta.env.VITE_appId,
-  measurementId: import.meta.env.VITE_measurementId,
+// Mock Firebase for now to test if the app renders
+export const auth = {
+  currentUser: null,
+  onAuthStateChanged: (callback) => {
+    console.log('Mock Firebase: onAuthStateChanged called');
+    callback(null); // No user logged in
+    return () => {}; // cleanup function
+  },
+  signInWithEmailAndPassword: async () => {
+    throw new Error('Mock Firebase not implemented');
+  },
+  createUserWithEmailAndPassword: async () => {
+    throw new Error('Mock Firebase not implemented');
+  },
+  signInWithPopup: async () => {
+    throw new Error('Mock Firebase not implemented');
+  },
+  signOut: async () => {
+    console.log('Mock Firebase: signOut called');
+  }
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export default app;
+export default {};

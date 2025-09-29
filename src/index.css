@@ -2,239 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .security-button {
-    @apply relative px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 
-           rounded-lg font-semibold text-white transition-all duration-300 
-           hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25;
-  }
-
-  .security-card {
-    @apply bg-gray-800/50 p-6 rounded-2xl border border-gray-700 
-           hover:border-emerald-500/50 transition-all duration-300 
-           hover:transform hover:scale-105;
-  }
-
-  .security-input {
-    @apply w-full p-4 bg-slate-800/50 border-2 border-slate-600/50 
-           rounded-xl text-white placeholder-slate-400 
-           focus:border-emerald-400 focus:outline-none 
-           transition-all duration-300;
-  }
-}
-
-/* Custom Scrollbar */
-@layer utilities {
-  .scrollbar-security {
-    scrollbar-width: thin;
-    scrollbar-color: #10b981 #1e293b;
-  }
-
-  .scrollbar-security::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .scrollbar-security::-webkit-scrollbar-track {
-    @apply bg-slate-800;
-  }
-
-  .scrollbar-security::-webkit-scrollbar-thumb {
-    @apply bg-emerald-500 rounded;
-  }
-}
-  }
-}
-
-@keyframes bounce-gentle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-gentle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-@keyframes ping-slow {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+/* Custom animations for LandingPage */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes wiggle {
   0%, 100% {
-    transform: rotate(0deg);
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    opacity: var(--particle-opacity, 0.6);
   }
   25% {
-    transform: rotate(-3deg);
-  }
-  75% {
-    transform: rotate(3deg);
-  }
-}
-
-@keyframes slide-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes scale-in {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes morph {
-  0%, 100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translateY(-30px) translateX(10px) rotate(90deg) scale(1.1);
+    opacity: calc(var(--particle-opacity, 0.6) * 1.5);
   }
   50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: translateY(-20px) translateX(-15px) rotate(180deg) scale(0.9);
+    opacity: var(--particle-opacity, 0.6);
+  }
+  75% {
+    transform: translateY(-40px) translateX(5px) rotate(270deg) scale(1.2);
+    opacity: calc(var(--particle-opacity, 0.6) * 0.7);
   }
 }
 
-/* Animation Classes */
-.animate-float-3d {
-  animation: float-3d 8s ease-in-out infinite;
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3),
+                0 0 40px rgba(16, 185, 129, 0.1),
+                inset 0 0 20px rgba(16, 185, 129, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.6),
+                0 0 80px rgba(16, 185, 129, 0.2),
+                inset 0 0 30px rgba(16, 185, 129, 0.2);
+  }
 }
 
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
+.gradient-bg {
+  background: linear-gradient(-45deg, #0f1419, #1a1625, #0d1b2a, #1e1b4b);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
 }
 
-.animate-shimmer {
-  background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
+.glass-morphism {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+.vault-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
 }
 
-.animate-bounce-gentle {
-  animation: bounce-gentle 2s ease-in-out infinite;
+.text-shimmer {
+  background: linear-gradient(45deg,
+    #10b981, #06d6a0, #118ab2, #073b4c, #10b981);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease infinite;
 }
 
-.animate-pulse-gentle {
-  animation: pulse-gentle 2s ease-in-out infinite;
+.particle {
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 2s ease-in-out infinite;
-}
-
-.animate-ping-slow {
-  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+.particle::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0.3;
+  filter: blur(2px);
+  z-index: -1;
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-.animate-wiggle {
-  animation: wiggle 1s ease-in-out infinite;
-}
-
-.animate-slide-down {
-  animation: slide-down 0.5s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
-}
-
-.animate-morph {
-  animation: morph 8s ease-in-out infinite;
-}
-
-/* Security Pattern Grid */
-.grid-cols-20 {
-  grid-template-columns: repeat(20, 1fr);
-}
-
-/* Enhanced Backdrop Blur */
-.backdrop-blur-xl {
-  backdrop-filter: blur(24px);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #10b981;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #059669;
-}
-
-/* Selection Styling */
-::selection {
-  background: #10b981;
-  color: white;
-}
-
-/* Focus Styles */
-.focus\:ring-emerald-500:focus {
-  --tw-ring-color: rgb(16 185 129 / 0.5);
-  --tw-ring-opacity: 0.5;
-}
-
-/* Smooth Transitions */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+.quote-line {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }

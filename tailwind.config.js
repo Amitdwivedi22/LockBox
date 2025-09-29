@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -9,15 +10,19 @@ module.exports = {
         'spin-slow': 'spin-slow 8s linear infinite',
         'shimmer': 'shimmer 3s ease-in-out infinite',
         'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-        'bounce-gentle': 'bounce-gentle 2s ease-in-out infinite',
+        'bounce-gentle': 'bounce 3s infinite ease-in-out',
         'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite',
-        'pulse-slow': 'pulse-slow 2s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'ping-slow': 'ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite',
         'float': 'float 3s ease-in-out infinite',
         'wiggle': 'wiggle 1s ease-in-out infinite',
         'slide-down': 'slide-down 0.5s ease-out forwards',
         'scale-in': 'scale-in 0.5s ease-out forwards',
         'morph': 'morph 8s ease-in-out infinite',
+      },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(20px)',
       },
       keyframes: {
         'float-3d': {
@@ -34,5 +39,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
