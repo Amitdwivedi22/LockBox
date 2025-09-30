@@ -7,6 +7,7 @@ const LandingPage = ({ onAuthenticated, onNavigateAuth }) => {
   const heroRef = useRef(null);
   const particlesRef = useRef(null);
 
+  // Security quotes for animation
   const securityQuotes = useMemo(() => [
     {
       line1: "Security is not a product,",
@@ -403,21 +404,6 @@ const LandingPage = ({ onAuthenticated, onNavigateAuth }) => {
       </div>
     </div>
   )
-};
-
-export default LandingPage;
-        </div>
-
-        {/* Footer */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-slate-500 text-lg">
-          <div className="flex items-center gap-4">
-            <span>🔒</span>
-            <span>Secured by end-to-end encryption</span>
-          </div>
-        </div>
-      </div>
-    )
-
 };
 
 export default LandingPage;
